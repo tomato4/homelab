@@ -70,6 +70,8 @@ spec:
               value: "1000"
             - name: VERSION
               value: "docker"
+            - name: PLEX_CLAIM
+              value: "claim-_u9kyinsScW8HyTsmjNS"
 ---
 apiVersion: v1
 kind: Service
