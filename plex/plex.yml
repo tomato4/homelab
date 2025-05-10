@@ -72,79 +72,6 @@ spec:
               value: "docker"
 ---
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: plex
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: plex-config-pv
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/storage/plex/config"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: plex-config-pvc
-  namespace: plex
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: plex
-  namespace: plex
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      name: plex
-  template:
-    metadata:
-      labels:
-        name: plex
-    spec:
-      volumes:
-        - name: plex-config
-          persistentVolumeClaim:
-            claimName: plex-config-pvc
-        - name: media
-          hostPath:
-            path: /mnt/storage/media
-      containers:
-        - name: plex
-          image: plexinc/pms-docker
-          #          imagePullPolicy: IfNotPresent
-          livenessProbe:
-            tcpSocket:
-              port: 32400
-            initialDelaySeconds: 60
-            periodSeconds: 60
-          volumeMounts:
-            - mountPath: /config
-              name: plex-config
-            - mountPath: /media
-              name: media
-          env:
-            - name: PUID
-              value: "1000"
-            - name: PGID
-              value: "1000"
-            - name: VERSION
-              value: "docker"
----
-apiVersion: v1
 kind: Service
 metadata:
   name: plex
@@ -168,7 +95,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
 spec:
   rules:
-    - host: plex.local
+    - host: plex.server
       http:
         paths:
           - path: /
