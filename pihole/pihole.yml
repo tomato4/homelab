@@ -32,8 +32,6 @@ spec:
       labels:
         app: pihole
     spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
       volumes:
         - name: pihole-config
           persistentVolumeClaim:
@@ -44,10 +42,15 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 53
+              hostPort: 53
               name: dns-udp
               protocol: UDP
             - containerPort: 53
+              hostPort: 53
               name: dns-tcp
+              protocol: TCP
+            - containerPort: 80
+              name: http
               protocol: TCP
           volumeMounts:
             - name: pihole-config
