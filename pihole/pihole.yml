@@ -48,6 +48,7 @@ spec:
               name: dns-tcp
               protocol: TCP
             - containerPort: 80
+              hostPort: 8080
               name: http
               protocol: TCP
           volumeMounts:
@@ -83,7 +84,7 @@ spec:
     - host: pihole.server
       http:
         paths:
-          - path: /
+          - path: /admin
             pathType: Prefix
             backend:
               service:
