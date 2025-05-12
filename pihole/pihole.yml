@@ -30,6 +30,8 @@ spec:
       labels:
         app: pihole
     spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       volumes:
         - name: pihole-config
           persistentVolumeClaim:
@@ -45,11 +47,6 @@ spec:
             - containerPort: 53
               name: dns-tcp
               protocol: TCP
-            - containerPort: 80
-              name: http
-          env:
-            - name: WEBPASSWORD
-              value: "MZ4t#3Je5R*#6Tks"
           volumeMounts:
             - name: pihole-config
               mountPath: /etc/pihole
@@ -57,24 +54,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pihole
+  name: pihole-web
   namespace: pihole
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: pihole
   ports:
-    - name: dns-udp
-      port: 53
-      protocol: UDP
-      targetPort: 53
-    - name: dns-tcp
-      port: 53
-      protocol: TCP
-      targetPort: 53
-    - name: http
-      port: 80
+    - port: 80
       targetPort: 80
+      protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -92,6 +81,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: pihole
+                name: pihole-web
                 port:
                   number: 80
