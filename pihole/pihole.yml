@@ -47,6 +47,9 @@ spec:
             - containerPort: 53
               name: dns-tcp
               protocol: TCP
+            - containerPort: 80
+              name: http
+              protocol: TCP
           volumeMounts:
             - name: pihole-config
               mountPath: /etc/pihole
