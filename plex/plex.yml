@@ -70,6 +70,8 @@ spec:
               value: "1002"
             - name: VERSION
               value: "docker"
+            - name: TZ
+              value: "Europe/Prague"
 #            - name: PLEX_CLAIM
 #              value: ""
 ---

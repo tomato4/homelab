@@ -50,6 +50,9 @@ spec:
           volumeMounts:
             - name: pihole-config
               mountPath: /etc/pihole
+          env:
+            - name: TZ
+              value: "Europe/Prague"
 ---
 apiVersion: v1
 kind: Service
