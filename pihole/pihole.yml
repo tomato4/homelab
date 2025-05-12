@@ -72,7 +72,7 @@ spec:
     app: pihole
   ports:
     - name: http
-      port: 8080
+      port: 80
       targetPort: 8080
       protocol: TCP
 ---
@@ -94,4 +94,4 @@ spec:
               service:
                 name: pihole-web
                 port:
-                  number: 8080
+                  number: 80
