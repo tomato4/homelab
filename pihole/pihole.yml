@@ -117,7 +117,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-    - host: pihole.local
+    - host: pihole.internal
       http:
         paths:
           - path: /

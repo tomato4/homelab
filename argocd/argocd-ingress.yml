@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   rules:
-    - host: argo.server
+    - host: argo.internal
       http:
         paths:
           - path: /
