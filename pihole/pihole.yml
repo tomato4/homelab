@@ -86,7 +86,7 @@ spec:
     - host: pihole.server
       http:
         paths:
-          - path: /admin
+          - path: /
             pathType: Prefix
             backend:
               service:
