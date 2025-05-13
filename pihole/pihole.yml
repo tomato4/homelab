@@ -74,6 +74,40 @@ spec:
       targetPort: 80
       protocol: TCP
 ---
+kind: Service
+apiVersion: v1
+metadata:
+  name: pihole-dns-udp-svc
+  namespace: pihole
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "pihole"
+spec:
+  selector:
+    app: pihole
+  type: LoadBalancer
+  ports:
+    - name: dns-udp
+      port: 53
+      targetPort: 53
+      protocol: UDP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: pihole-dns-tcp-svc
+  namespace: pihole
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "pihole"
+spec:
+  selector:
+    app: pihole
+  type: LoadBalancer
+  ports:
+    - name: dns-tcp
+      port: 53
+      targetPort: 53
+      protocol: TCP
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
