@@ -99,7 +99,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
 spec:
   rules:
-    - host: plex.server
+    - host: plex.local
       http:
         paths:
           - path: /
