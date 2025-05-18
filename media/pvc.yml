@@ -89,7 +89,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: media-pvc
+  name: media-downloads-pvc
 spec:
   accessModes:
     - ReadWriteOnce

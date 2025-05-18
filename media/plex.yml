@@ -42,8 +42,8 @@ spec:
           persistentVolumeClaim:
             claimName: plex-config-pvc
         - name: media
-          hostPath:
-            path: /mnt/storage/media
+          persistentVolumeClaim:
+            claimName: media-pvc
       containers:
         - name: plex
           image: plexinc/pms-docker
