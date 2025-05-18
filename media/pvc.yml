@@ -22,6 +22,7 @@ spec:
     requests:
       storage: 100Gi
   volumeName: media-movies-pv
+  storageClassName: ""
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -33,7 +34,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/storage/media/series
+    path: "/mnt/storage/media/series"
   persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
@@ -47,6 +48,7 @@ spec:
     requests:
       storage: 100Gi
   volumeName: media-series-pv
+  storageClassName: ""
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -58,7 +60,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/storage/media
+    path: "/mnt/storage/media"
   persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
@@ -72,6 +74,7 @@ spec:
     requests:
       storage: 100Gi
   volumeName: media
+  storageClassName: ""
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -83,7 +86,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/storage/media/downloads
+    path: "/mnt/storage/media/downloads"
   persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
@@ -97,3 +100,4 @@ spec:
     requests:
       storage: 100Gi
   volumeName: media-downloads-pv
+  storageClassName: ""
