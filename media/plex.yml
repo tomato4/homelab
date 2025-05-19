@@ -56,8 +56,8 @@ spec:
               value: "docker"
             - name: TZ
               value: "Europe/Prague"
-#            - name: PLEX_CLAIM
-#              value: ""
+            - name: PLEX_CLAIM
+              value: "claim-pm7Y7PyPhaTLWzyhdhpo"
 ---
 apiVersion: v1
 kind: Service
