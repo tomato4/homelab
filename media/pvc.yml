@@ -73,7 +73,7 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  volumeName: media
+  volumeName: media-pv
   storageClassName: ""
 ---
 apiVersion: v1
