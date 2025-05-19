@@ -70,7 +70,7 @@ spec:
             - name: TZ
               value: "Europe/Prague"
             - name: PLEX_CLAIM
-              value: "claim-jF2GMzibivP478vApxvx"
+              value: "claim-NKEXHCBz-vWiPetJyMgB"
 ---
 apiVersion: v1
 kind: Service
