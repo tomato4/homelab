@@ -1,7 +1,19 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: config-plex-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/storage/config/plex
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: plex-config-pvc
+  name: config-plex-pvc
   namespace: media
 spec:
   accessModes:
@@ -9,7 +21,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: local-path-retain
+  volumeName: config-plex-pv
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,7 +41,7 @@ spec:
       volumes:
         - name: plex-config
           persistentVolumeClaim:
-            claimName: plex-config-pvc
+            claimName: config-plex-pvc
         - name: media
           persistentVolumeClaim:
             claimName: media-pvc
@@ -57,7 +69,7 @@ spec:
             - name: TZ
               value: "Europe/Prague"
             - name: PLEX_CLAIM
-              value: "claim--x6Tgs9KtvbkpjhCSftn"
+              value: "claim-YQMgqvfoQyGXojN-2nsE"
 ---
 apiVersion: v1
 kind: Service

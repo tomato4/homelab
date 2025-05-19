@@ -9,7 +9,6 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: /mnt/storage/media/movies
-  persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -35,7 +34,6 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/mnt/storage/media/series"
-  persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -61,7 +59,6 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/mnt/storage/media"
-  persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -87,7 +84,6 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/mnt/storage/media/downloads"
-  persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
