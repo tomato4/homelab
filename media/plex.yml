@@ -9,6 +9,7 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: /mnt/storage/config/plex
+  storageClassName: ""
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

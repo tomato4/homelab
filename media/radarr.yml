@@ -9,6 +9,7 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: /mnt/storage/config/radarr
+  storageClassName: ""
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
