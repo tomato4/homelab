@@ -52,6 +52,13 @@ spec:
               mountPath: /downloads
             - name: movies
               mountPath: /movies
+          env:
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "1002"
+            - name: TZ
+              value: "Europe/Prague"
       volumes:
         - name: config
           persistentVolumeClaim:
