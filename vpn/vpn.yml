@@ -40,3 +40,16 @@ spec:
                       path: client.ovpn
                     - key: auth.txt
                       path: auth.txt
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vpn-gateway
+  namespace: media
+spec:
+  clusterIP: None  # headless
+  selector:
+    app: vpn-gateway
+  ports:
+    - port: 1194  # arbitrary, not used for actual routing
+      targetPort: 1194
