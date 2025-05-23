@@ -15,6 +15,7 @@ spec:
       containers:
         - name: transmission
           image: haugene/transmission-openvpn
+          imagePullPolicy: IfNotPresent
           env:
             - name: OPENVPN_PROVIDER
               value: "WINDSCRIBE"
