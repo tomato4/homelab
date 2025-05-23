@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpn-gateway
+  namespace: media # TODO find better solution - using media because of secrets
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vpn-gateway
+  template:
+    metadata:
+      labels:
+        app: vpn-gateway
+    spec:
+      containers:
+        - name: openvpn
+          image: dperson/openvpn-client
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+            privileged: true
+          volumeMounts:
+            - name: vpn-config
+              mountPath: /vpn
+              readOnly: true
+          command: ["/bin/sh", "-c"]
+          args:
+            - openvpn --config /vpn/client.ovpn --auth-user-pass /vpn/auth.txt
+      volumes:
+        - name: vpn-config
+          projected:
+            sources:
+              - secret:
+                  name: windscribe-auth
+                  items:
+                    - key: ovpn
+                      path: client.ovpn
+                    - key: auth.txt
+                      path: auth.txt
