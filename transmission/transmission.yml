@@ -36,7 +36,7 @@ spec:
                   name: windscribe-auth
                   key: password
             - name: TRANSMISSION_WEB_UI
-              value: "combustion"
+              value: "kettu"
             - name: LOCAL_NETWORK
               value: "10.42.0.0/16"
           volumeMounts:
