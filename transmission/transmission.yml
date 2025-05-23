@@ -71,7 +71,7 @@ metadata:
   namespace: transmission
 spec:
   rules:
-    - host: transmission.local
+    - host: transmission.internal
       http:
         paths:
           - path: /
