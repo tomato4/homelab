@@ -39,7 +39,7 @@ spec:
       labels:
         app: prowlarr
     spec:
-      initContainers:
+      containers:
         - name: vpn
           image: qmcgaw/gluetun
           securityContext:
@@ -67,18 +67,6 @@ spec:
               value: "on"
             - name: FIREWALL_OUTBOUND_SUBNETS
               value: "10.42.0.0/15"
-        - name: ping
-          image: busybox
-          command:
-            - sh
-            - -c
-            - |
-              while ! ping -c 1 8.8.8.8; do
-                echo "Ping failed, retrying in 5"
-                sleep 5
-              done
-              echo "Ping successful, exiting"
-      containers:
         - name: prowlarr
           image: linuxserver/prowlarr
           imagePullPolicy: IfNotPresent
