@@ -39,22 +39,22 @@ spec:
       labels:
         app: prowlarr
     spec:
-      containers:
-        - name: openvpn
-          image: dperson/openvpn-client
-          imagePullPolicy: IfNotPresent
+      initContainers:
+        - name: route-via-vpn
+          image: busybox
+          command: [ "/bin/sh", "-c" ]
+          args:
+            - |
+              echo "Resolving VPN pod IP...";
+              VPN_IP=$(getent hosts vpn-gateway.media.svc.cluster.local | awk '{ print $1 }');
+              echo "Routing via $VPN_IP";
+              ip route del default
+              ip route add default via $VPN_IP
           securityContext:
             capabilities:
               add:
                 - NET_ADMIN
-            privileged: true
-          volumeMounts:
-            - name: vpn-config
-              mountPath: /vpn
-              readOnly: true
-          command: ["/bin/sh", "-c"]
-          args:
-            - openvpn --config /vpn/client.ovpn --auth-user-pass /vpn/auth.txt
+      containers:
         - name: prowlarr
           image: linuxserver/prowlarr
           env:
@@ -102,8 +102,6 @@ kind: Ingress
 metadata:
   name: prowlarr-ingress
   namespace: media
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
     - host: prowlarr.internal
