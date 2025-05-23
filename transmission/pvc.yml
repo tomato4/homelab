@@ -22,3 +22,28 @@ spec:
       storage: 10Gi
   volumeName: transmission-config-pv
   storageClassName: ""
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: transmission-media-pv
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/storage/media"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: transmission-media-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  volumeName: transmission-media-pv
+  storageClassName: ""
