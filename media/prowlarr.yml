@@ -41,7 +41,7 @@ spec:
     spec:
       initContainers:
         - name: vpn
-          image: qmcgaw/gluetun:v3.36.0
+          image: qmcgaw/gluetun
           securityContext:
             capabilities:
               add:
@@ -61,6 +61,8 @@ spec:
                 secretKeyRef:
                   name: windscribe-auth
                   key: password
+            - name: SERVER_REGIONS
+              value: "Prague"
             - name: DNS_KEEP_NAMESERVER
               value: "on"
             - name: FIREWALL_OUTBOUND_SUBNETS
