@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/storage/config/transmission
+    path: "/mnt/storage/config/transmission"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

@@ -15,39 +15,35 @@ spec:
       containers:
         - name: transmission
           image: haugene/transmission-openvpn
-          securityContext:
-            capabilities:
-              add:
-                - NET_ADMIN
           env:
             - name: OPENVPN_PROVIDER
-              value: "custom"
+              value: "WINDSCRIBE"
             - name: OPENVPN_CONFIG
-              value: "windscribe"
+              value: "Prague-Vltava-udp"
             - name: OPENVPN_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: windscribe-auth
-                  key: auth.txt
+                  key: username
             - name: OPENVPN_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: windscribe-auth
-                  key: auth.txt
+                  key: password
             - name: TRANSMISSION_WEB_UI
               value: "combustion"
             - name: LOCAL_NETWORK
-              value: "192.168.0.0/16"
+              value: "10.42.0.0/16"
           volumeMounts:
-            - name: openvpn
-              mountPath: /etc/openvpn/custom/
-            - name: downloads
+            - name: config
+              mountPath: /config
+            - name: media
               mountPath: /data/media
       volumes:
-        - name: openvpn
-          secret:
-            secretName: windscribe-auth
-        - name: downloads
+        - name: config
+          persistentVolumeClaim:
+            claimName: transmission-config-pvc
+        - name: media
           persistentVolumeClaim:
             claimName: transmission-media-pvc
 ---
