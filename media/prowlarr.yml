@@ -47,7 +47,7 @@ spec:
           args:
             - |
               echo "Resolving VPN pod IP..."
-              VPN_IP=$(getent hosts vpn-gateway.vpn.svc.cluster.local | awk '{ print $1 }')
+              VPN_IP=$(getent hosts vpn-gateway.media.svc.cluster.local | awk '{ print $1 }')
               if [ -z "$VPN_IP" ]; then
                 echo "ERROR: Could not resolve VPN pod IP"
                 exit 1
