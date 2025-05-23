@@ -40,43 +40,42 @@ spec:
         app: prowlarr
     spec:
       initContainers:
-        - name: route-via-vpn
-          image: alpine:latest
-          imagePullPolicy: IfNotPresent
-          command: [ "/bin/sh", "-c" ]
-          args:
-            - |
-              set -e
-              echo "🔍 Discovering VPN pod IP via DNS..."
-              VPN_IP=$(getent hosts vpn-gateway.media.svc.cluster.local | awk '{ print $1 }')
-      
-              if [ -z "$VPN_IP" ]; then
-                echo "❌ ERROR: Could not resolve VPN pod IP"
-                exit 1
-              fi
-      
-              echo "✅ VPN IP resolved: $VPN_IP"
-      
-              echo "🔍 Discovering current default gateway (K8s node gateway)..."
-              K8S_GATEWAY=$(ip route | awk '/default/ {print $3}')
-      
-              if [ -z "$K8S_GATEWAY" ]; then
-                echo "❌ ERROR: Could not find K8s gateway IP"
-                exit 1
-              fi
-      
-              echo "✅ K8s gateway is: $K8S_GATEWAY"
-      
-              echo "🛠️  Rewriting routes..."
-              ip route del default
-              ip route add default via $VPN_IP
-              ip route replace 10.42.0.0/16 via $K8S_GATEWAY
-              ip route replace 10.43.0.0/16 via $K8S_GATEWAY
-              echo "✅ Routing updated."
+        - name: vpn
+          image: qmcgaw/gluetun:v3.36.0
           securityContext:
             capabilities:
               add:
                 - NET_ADMIN
+          env:
+            - name: VPN_SERVICE_PROVIDER
+              value: windscribe
+            - name: VPN_TYPE
+              value: openvpn
+            - name: OPENVPN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: windscribe-auth
+                  key: username
+            - name: OPENVPN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: windscribe-auth
+                  key: password
+            - name: DNS_KEEP_NAMESERVER
+              value: "on"
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              value: "10.42.0.0/15"
+        - name: ping
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              while ! ping -c 1 8.8.8.8; do
+                echo "Ping failed, retrying in 5"
+                sleep 5
+              done
+              echo "Ping successful, exiting"
       containers:
         - name: prowlarr
           image: linuxserver/prowlarr
@@ -92,22 +91,12 @@ spec:
             - name: config
               mountPath: /config
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: 1001
+            runAsGroup: 1002
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: config-prowlarr-pvc
-        - name: vpn-config
-          projected:
-            sources:
-              - secret:
-                  name: windscribe-auth
-                  items:
-                    - key: ovpn
-                      path: client.ovpn
-                    - key: auth.txt
-                      path: auth.txt
 ---
 apiVersion: v1
 kind: Service
