@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transmission
+  template:
+    metadata:
+      labels:
+        app: transmission
+    spec:
+      containers:
+        - name: transmission
+          image: haugene/transmission-openvpn
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          env:
+            - name: OPENVPN_PROVIDER
+              value: "custom"
+            - name: OPENVPN_CONFIG
+              value: "windscribe"
+            - name: OPENVPN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: windscribe-auth
+                  key: auth.txt
+            - name: OPENVPN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: windscribe-auth
+                  key: auth.txt
+            - name: TRANSMISSION_WEB_UI
+              value: "combustion"
+            - name: LOCAL_NETWORK
+              value: "192.168.0.0/16"
+          volumeMounts:
+            - name: openvpn
+              mountPath: /etc/openvpn/custom/
+            - name: downloads
+              mountPath: /data/media
+      volumes:
+        - name: openvpn
+          secret:
+            secretName: windscribe-auth
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: media-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: transmission
+  namespace: transmission
+spec:
+  selector:
+    app: transmission
+  ports:
+    - port: 80
+      targetPort: 9091
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: transmission-ingress
+  namespace: transmission
+spec:
+  rules:
+    - host: transmission.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: transmission
+                port:
+                  number: 9091
