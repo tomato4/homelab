@@ -29,6 +29,13 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - openvpn --config /vpn/client.ovpn --auth-user-pass /vpn/auth.txt
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
       volumes:
         - name: vpn-config
           projected:

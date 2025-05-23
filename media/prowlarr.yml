@@ -46,15 +46,33 @@ spec:
           command: [ "/bin/sh", "-c" ]
           args:
             - |
-              echo "Resolving VPN pod IP..."
-              VPN_IP=$(getent hosts vpn-gateway.media.svc.cluster.local | awk '{ print $1 }')
+              set -e
+              echo "🔍 Discovering VPN pod IP via DNS..."
+              VPN_IP=$(getent hosts vpn-gateway.vpn.svc.cluster.local | awk '{ print $1 }')
+      
               if [ -z "$VPN_IP" ]; then
-                echo "ERROR: Could not resolve VPN pod IP"
+                echo "❌ ERROR: Could not resolve VPN pod IP"
                 exit 1
               fi
-              echo "Routing via $VPN_IP"
+      
+              echo "✅ VPN IP resolved: $VPN_IP"
+      
+              echo "🔍 Discovering current default gateway (K8s node gateway)..."
+              K8S_GATEWAY=$(ip route | awk '/default/ {print $3}')
+      
+              if [ -z "$K8S_GATEWAY" ]; then
+                echo "❌ ERROR: Could not find K8s gateway IP"
+                exit 1
+              fi
+      
+              echo "✅ K8s gateway is: $K8S_GATEWAY"
+      
+              echo "🛠️  Rewriting routes..."
               ip route del default
               ip route add default via $VPN_IP
+              ip route add 10.42.0.0/16 via $K8S_GATEWAY
+              ip route add 10.43.0.0/16 via $K8S_GATEWAY
+              echo "✅ Routing updated."
           securityContext:
             capabilities:
               add:
