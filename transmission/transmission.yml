@@ -16,6 +16,10 @@ spec:
         - name: transmission
           image: haugene/transmission-openvpn
           imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
           env:
             - name: OPENVPN_PROVIDER
               value: "WINDSCRIBE"
