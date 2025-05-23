@@ -62,7 +62,7 @@ spec:
                   name: windscribe-auth
                   key: password
             - name: SERVER_REGIONS
-              value: "Prague"
+              value: "Czech Republic"
             - name: DNS_KEEP_NAMESERVER
               value: "on"
             - name: FIREWALL_OUTBOUND_SUBNETS
