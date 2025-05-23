@@ -70,8 +70,8 @@ spec:
               echo "🛠️  Rewriting routes..."
               ip route del default
               ip route add default via $VPN_IP
-              ip route add 10.42.0.0/16 via $K8S_GATEWAY
-              ip route add 10.43.0.0/16 via $K8S_GATEWAY
+              ip route replace 10.42.0.0/16 via $K8S_GATEWAY
+              ip route replace 10.43.0.0/16 via $K8S_GATEWAY
               echo "✅ Routing updated."
           securityContext:
             capabilities:
