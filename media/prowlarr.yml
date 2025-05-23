@@ -41,13 +41,18 @@ spec:
     spec:
       initContainers:
         - name: route-via-vpn
-          image: busybox
+          image: alpine:latest
+          imagePullPolicy: IfNotPresent
           command: [ "/bin/sh", "-c" ]
           args:
             - |
-              echo "Resolving VPN pod IP...";
-              VPN_IP=$(getent hosts vpn-gateway.media.svc.cluster.local | awk '{ print $1 }');
-              echo "Routing via $VPN_IP";
+              echo "Resolving VPN pod IP..."
+              VPN_IP=$(getent hosts vpn-gateway.vpn.svc.cluster.local | awk '{ print $1 }')
+              if [ -z "$VPN_IP" ]; then
+                echo "ERROR: Could not resolve VPN pod IP"
+                exit 1
+              fi
+              echo "Routing via $VPN_IP"
               ip route del default
               ip route add default via $VPN_IP
           securityContext:
@@ -57,6 +62,7 @@ spec:
       containers:
         - name: prowlarr
           image: linuxserver/prowlarr
+          imagePullPolicy: IfNotPresent
           env:
             - name: PUID
               value: "1001"
