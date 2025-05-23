@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: config-prowlarr-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/storage/config/prowlarr"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config-prowlarr-pvc
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: config-prowlarr-pv
+  storageClassName: ""
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  namespace: prowlarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      containers:
+        - name: openvpn
+          image: dperson/openvpn-client
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          volumeMounts:
+            - name: vpn-config
+              mountPath: /vpn
+              readOnly: true
+          command: ["/bin/sh", "-c"]
+          args:
+            - openvpn --config /vpn/client.ovpn --auth-user-pass /vpn/auth.txt
+        - name: prowlarr
+          image: linuxserver/prowlarr
+          env:
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "1002"
+            - name: TZ
+              value: "Europe/Prague"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config-prowlarr-pvc
+        - name: vpn-config
+          projected:
+            sources:
+              - secret:
+                  name: windscribe-auth
+                  items:
+                    - key: ovpn
+                      path: client.ovpn
+                    - key: auth.txt
+                      path: auth.txt
