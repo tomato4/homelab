@@ -102,6 +102,8 @@ kind: Ingress
 metadata:
   name: prowlarr-ingress
   namespace: media
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
     - host: prowlarr.internal
