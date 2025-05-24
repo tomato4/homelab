@@ -49,8 +49,6 @@ spec:
             - name: config
               mountPath: /config
             - name: media
-              mountPath: /data/completed
-            - name: movies
               mountPath: /movies
           env:
             - name: PUID
@@ -66,9 +64,6 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media-pvc
-        - name: movies
-          persistentVolumeClaim:
-            claimName: media-movies-pvc
 ---
 apiVersion: v1
 kind: Service
