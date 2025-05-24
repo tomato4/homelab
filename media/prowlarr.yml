@@ -40,33 +40,33 @@ spec:
         app: prowlarr
     spec:
       containers:
-        - name: vpn
-          image: qmcgaw/gluetun
-          securityContext:
-            capabilities:
-              add:
-                - NET_ADMIN
-          env:
-            - name: VPN_SERVICE_PROVIDER
-              value: windscribe
-            - name: VPN_TYPE
-              value: openvpn
-            - name: OPENVPN_USER
-              valueFrom:
-                secretKeyRef:
-                  name: windscribe-auth
-                  key: username
-            - name: OPENVPN_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: windscribe-auth
-                  key: password
-            - name: SERVER_REGIONS
-              value: "Czech Republic"
-            - name: DNS_KEEP_NAMESERVER
-              value: "on"
-            - name: FIREWALL_OUTBOUND_SUBNETS
-              value: "10.42.0.0/15"
+#        - name: vpn
+#          image: qmcgaw/gluetun
+#          securityContext:
+#            capabilities:
+#              add:
+#                - NET_ADMIN
+#          env:
+#            - name: VPN_SERVICE_PROVIDER
+#              value: windscribe
+#            - name: VPN_TYPE
+#              value: openvpn
+#            - name: OPENVPN_USER
+#              valueFrom:
+#                secretKeyRef:
+#                  name: windscribe-auth
+#                  key: username
+#            - name: OPENVPN_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  name: windscribe-auth
+#                  key: password
+#            - name: SERVER_REGIONS
+#              value: "Czech Republic"
+#            - name: DNS_KEEP_NAMESERVER
+#              value: "on"
+#            - name: FIREWALL_OUTBOUND_SUBNETS
+#              value: "10.42.0.0/15"
         - name: prowlarr
           image: linuxserver/prowlarr
           imagePullPolicy: IfNotPresent
