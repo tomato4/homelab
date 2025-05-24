@@ -51,30 +51,3 @@ spec:
       storage: 100Gi
   volumeName: transmission-media-pv
   storageClassName: ""
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: transmission-downloads-pv
-  namespace: media
-spec:
-  capacity:
-    storage: 100Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/storage/transmission"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: transmission-downloads-pvc
-  namespace: media
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Gi
-  volumeName: transmission-downloads-pv
-  storageClassName: ""

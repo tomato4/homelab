@@ -49,9 +49,7 @@ spec:
             - name: config
               mountPath: /config
             - name: media
-              mountPath: /data/completed
-            - name: downloads
-              mountPath: /data/incomplete
+              mountPath: /data
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -59,9 +57,6 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: transmission-media-pvc
-        - name: downloads
-          persistentVolumeClaim:
-              claimName: transmission-downloads-pvc
 ---
 apiVersion: v1
 kind: Service
