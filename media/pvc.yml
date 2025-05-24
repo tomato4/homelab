@@ -72,28 +72,3 @@ spec:
       storage: 100Gi
   volumeName: media-pv
   storageClassName: ""
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: media-downloads-pv
-spec:
-  capacity:
-    storage: 100Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/storage/media/downloads"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: media-downloads-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Gi
-  volumeName: media-downloads-pv
-  storageClassName: ""
