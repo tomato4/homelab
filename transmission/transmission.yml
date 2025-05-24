@@ -42,7 +42,7 @@ spec:
                   name: windscribe-auth
                   key: password
             - name: TRANSMISSION_WEB_UI
-              value: "kettu"
+              value: "flood-for-transmission"
             - name: LOCAL_NETWORK
               value: "10.42.0.0/16"
           volumeMounts:
