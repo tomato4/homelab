@@ -60,7 +60,7 @@ spec:
             claimName: transmission-media-pvc
         - name: downloads
           persistentVolumeClaim:
-              claimName: media-downloads-pvc
+              claimName: transmission-downloads-pvc
 ---
 apiVersion: v1
 kind: Service

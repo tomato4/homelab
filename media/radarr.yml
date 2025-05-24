@@ -48,8 +48,8 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: downloads
-              mountPath: /downloads
+            - name: media
+              mountPath: /data/completed
             - name: movies
               mountPath: /movies
           env:
@@ -63,12 +63,12 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: config-radarr-pvc
-        - name: downloads
-          persistentVolumeClaim:
-            claimName: media-downloads-pvc
-        - name: movies
+        - name: media
           persistentVolumeClaim:
             claimName: media-pvc
+        - name: movies
+          persistentVolumeClaim:
+            claimName: media-movies-pvc
 ---
 apiVersion: v1
 kind: Service
