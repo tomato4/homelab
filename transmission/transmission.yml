@@ -22,6 +22,10 @@ spec:
               add:
                 - NET_ADMIN
           env:
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "1002"
             - name: OPENVPN_PROVIDER
               value: "WINDSCRIBE"
             - name: OPENVPN_CONFIG
