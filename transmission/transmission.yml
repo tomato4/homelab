@@ -5,6 +5,7 @@ metadata:
   namespace: media # TODO to simplify secrets for VPN - find out better solution
 spec:
   replicas: 1
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: transmission
