@@ -16,6 +16,13 @@ sudo kubectl apply -f argocd-disable-internal-tls.yml
 # Metallb
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.9/config/manifests/metallb-native.yaml
 
+# Cert
+mkcert -cert-file server.pem -key-file server-key.pem "*.server.local"
+kubectl create secret tls homelab-tls \
+  --namespace kube-system \
+  --cert=homelab.pem \
+  --key=homelab-key.pem
+
 # VPN
 kubectl create secret generic windscribe-auth \
   --namespace=media \
@@ -23,3 +30,8 @@ kubectl create secret generic windscribe-auth \
   --from-file=auth.txt=auth.txt \
   --from-literal=username="$(head -n 1 auth.txt)" \
   --from-literal=password="$(tail -n 1 auth.txt)"
+
+# Tailscale
+kubectl create secret generic tailscale-auth \
+  -n tailscale \
+  --from-literal=tsAuthKey="tskey-auth-kT4EZwqNT911CNTRL-6cLYt9Ffdido4bZ35SDNjdcGd9rY7cTjG"  # Replace with your real key
