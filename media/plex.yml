@@ -111,6 +111,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: plex-ingress-tailscale
+  annotations:
+    tailscale.com/funnel: "true"
 spec:
   defaultBackend:
     service:
