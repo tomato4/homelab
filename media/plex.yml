@@ -104,17 +104,17 @@ spec:
                 port:
                   number: 32400
 ---
-apiVersion: tailscale.com/v1alpha1
-kind: IngressRoute
-metadata:
-  name: plex-ingress-tailscale
-  namespace: media
-spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`plex.tailbe373.ts.net`)  # This will be the Tailscale domain
-      kind: Rule
-      services:
-        - name: plex
-          port: 32400
+#apiVersion: tailscale.com/v1alpha1
+#kind: IngressRoute
+#metadata:
+#  name: plex-ingress-tailscale
+#  namespace: media
+#spec:
+#  entryPoints:
+#    - web
+#  routes:
+#    - match: Host(`plex.tailbe373.ts.net`)  # This will be the Tailscale domain
+#      kind: Rule
+#      services:
+#        - name: plex
+#          port: 32400

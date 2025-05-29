@@ -32,6 +32,14 @@ kubectl create secret generic windscribe-auth \
   --from-literal=password="$(tail -n 1 auth.txt)"
 
 # Tailscale
-kubectl create secret generic tailscale-auth \
-  -n tailscale \
-  --from-literal=tsAuthKey=""
+# https://tailscale.com/kb/1236/kubernetes-operator
+helm upgrade \
+  --install \
+  tailscale-operator \
+  tailscale/tailscale-operator \
+  --namespace=tailscale \
+  --create-namespace \
+  --set-string oauth.clientId="" \
+  --set-string oauth.clientSecret="" \
+  --wait
+
