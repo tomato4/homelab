@@ -34,4 +34,4 @@ kubectl create secret generic windscribe-auth \
 # Tailscale
 kubectl create secret generic tailscale-auth \
   -n tailscale \
-  --from-literal=tsAuthKey="tskey-auth-kT4EZwqNT911CNTRL-6cLYt9Ffdido4bZ35SDNjdcGd9rY7cTjG"  # Replace with your real key
+  --from-literal=tsAuthKey=""
