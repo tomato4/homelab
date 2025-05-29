@@ -78,9 +78,9 @@ kind: Service
 metadata:
   name: plex
   namespace: media
-  annotations:
-    tailscale.com/expose: "true"
-    tailscale.com/hostname: "plex"
+#  annotations:
+#    tailscale.com/expose: "true"
+#    tailscale.com/hostname: "plex"
 spec:
   selector:
     name: plex
@@ -106,3 +106,18 @@ spec:
                 name: plex
                 port:
                   number: 32400
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: plex-ingress-tailscale
+spec:
+  defaultBackend:
+    service:
+      name: plex
+      port:
+        number: 32400
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - plex
