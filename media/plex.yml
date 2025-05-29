@@ -79,8 +79,8 @@ metadata:
   name: plex
   namespace: media
   annotations:
-    - tailscale.com/expose: "true"
-    - tailscale.com/hostname: "plex"
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: "plex"
 spec:
   selector:
     name: plex
