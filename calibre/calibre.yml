@@ -33,7 +33,7 @@ spec:
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: calibre-config-pvc
+            claimName: config-calibre-pvc
         - name: books
           persistentVolumeClaim:
             claimName: calibre-pvc
