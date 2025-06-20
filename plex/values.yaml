@@ -8,7 +8,7 @@ image:
 env:
   version: docker
 
-domain: plex.{{  }}
+domain: plex
 
 volumes:
   config:
