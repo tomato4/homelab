@@ -36,9 +36,9 @@ spec:
             - mountPath: /media
               name: media
           env:
-            - name: PUID
+            - name: PLEX_UID
               value: "{{ .Values.global.user.uid }}"
-            - name: PGID
+            - name: PLEX_GID
               value: "{{ .Values.global.user.gid }}"
             - name: VERSION
               value: "{{ .Values.env.version }}"

@@ -42,7 +42,7 @@ spec:
           env:
             - name: TZ
               value: "{{ .Values.global.timezone }}"
-            - name: PUID
+            - name: PIHOLE_UID
               value: "{{ .Values.global.user.uid }}"
-            - name: PGID
+            - name: PIHOLE_GID
               value: "{{ .Values.global.user.gid }}"
