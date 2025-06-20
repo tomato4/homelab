@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: transmission
-  namespace: media # TODO to simplify secrets for VPN - find out better solution
+  namespace: {{ .Values.namespace }}
 spec:
-  replicas: 1
-  revisionHistoryLimit: 1
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
   selector:
     matchLabels:
       app: transmission
@@ -16,35 +16,37 @@ spec:
     spec:
       containers:
         - name: transmission
-          image: haugene/transmission-openvpn
-          imagePullPolicy: IfNotPresent
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           securityContext:
             capabilities:
               add:
                 - NET_ADMIN
           env:
             - name: PUID
-              value: "1001"
+              value: {{ .Values.global.user.uid }}
             - name: PGID
-              value: "1002"
+              value: {{ .Values.env.gid }}
             - name: OPENVPN_PROVIDER
-              value: "WINDSCRIBE"
+              value: {{ .Values.env.openvpnProvider }}
             - name: OPENVPN_CONFIG
-              value: "Prague-Vltava-udp"
+              value: {{ .Values.env.openvpnConfig }}
             - name: OPENVPN_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: windscribe-auth
-                  key: username
+                  name: {{ .Values.secrets.name }}
+                  key: {{ .Values.secrets.usernameKey }}
             - name: OPENVPN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: windscribe-auth
-                  key: password
+                  name: {{ .Values.secrets.name }}
+                  key: {{ .Values.secrets.passwordKey }}
             - name: TRANSMISSION_WEB_UI
-              value: "flood-for-transmission"
+              value: {{ .Values.env.webUI }}
             - name: LOCAL_NETWORK
-              value: "10.42.0.0/16"
+              value: {{ .Values.env.localNetwork }}
+            - name: TZ
+              value: {{ .Values.global.timezone }}
           volumeMounts:
             - name: config
               mountPath: /config
@@ -57,33 +59,3 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: transmission-media-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: transmission
-  namespace: media
-spec:
-  selector:
-    app: transmission
-  ports:
-    - port: 9091
-      targetPort: 9091
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: transmission-ingress
-  namespace: media
-spec:
-  rules:
-    - host: transmission.internal
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: transmission
-                port:
-                  number: 9091
