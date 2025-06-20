@@ -26,7 +26,7 @@ spec:
             - name: PUID
               value: {{ .Values.global.user.uid }}
             - name: PGID
-              value: {{ .Values.env.gid }}
+              value: {{ .Values.global.user.gid }}
             - name: OPENVPN_PROVIDER
               value: {{ .Values.env.openvpnProvider }}
             - name: OPENVPN_CONFIG
