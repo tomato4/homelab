@@ -11,7 +11,7 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-        - ../global/values.yaml
+        - ../global/values.yml
   destination:
     server: https://kubernetes.default.svc
     namespace: plex
