@@ -1,0 +1,14 @@
+global:
+  user:
+    uid: "1001"
+    gid: "1002"
+
+  timezone: "Europe/Prague"
+
+  domain:
+    internal:
+      suffix: "internal"
+    public:
+      suffix: ""
+
+  revisionHistoryLimit: 1

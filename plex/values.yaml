@@ -1,0 +1,19 @@
+replicaCount: 1
+namespace: plex
+
+image:
+  repository: plexinc/pms-docker
+  pullPolicy: IfNotPresent
+
+env:
+  version: docker
+
+domain: plex.{{  }}
+
+volumes:
+  config:
+    size: 1Gi
+    path: /mnt/storage/config/plex
+  media:
+    size: 100Gi
+    path: /mnt/storage/media
