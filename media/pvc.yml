@@ -1,55 +1,55 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: media-movies-pv
-spec:
-  capacity:
-    storage: 100Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/storage/media/movies"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: media-movies-pvc
-  namespace: media
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Gi
-  volumeName: media-movies-pv
-  storageClassName: ""
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: media-series-pv
-spec:
-  capacity:
-    storage: 100Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/storage/media/series"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: media-series-pvc
-  namespace: media
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Gi
-  volumeName: media-series-pv
-  storageClassName: ""
----
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#  name: media-movies-pv
+#spec:
+#  capacity:
+#    storage: 100Gi
+#  accessModes:
+#    - ReadWriteOnce
+#  hostPath:
+#    path: "/mnt/storage/media/movies"
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: media-movies-pvc
+#  namespace: media
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 100Gi
+#  volumeName: media-movies-pv
+#  storageClassName: ""
+#---
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#  name: media-series-pv
+#spec:
+#  capacity:
+#    storage: 100Gi
+#  accessModes:
+#    - ReadWriteOnce
+#  hostPath:
+#    path: "/mnt/storage/media/series"
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: media-series-pvc
+#  namespace: media
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 100Gi
+#  volumeName: media-series-pv
+#  storageClassName: ""
+#---
 #apiVersion: v1
 #kind: PersistentVolume
 #metadata:
@@ -79,7 +79,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: media-pv
+  name: media-pv-legacy
 spec:
   capacity:
     storage: 100Gi
@@ -91,7 +91,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: media-pvc
+  name: media-pvc-legacy
   namespace: media
 spec:
   accessModes:
@@ -99,5 +99,5 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  volumeName: media-pv
+  volumeName: media-pv-legacy
   storageClassName: ""

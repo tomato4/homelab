@@ -64,7 +64,7 @@ spec:
             claimName: config-radarr-pvc
         - name: media
           persistentVolumeClaim:
-            claimName: media-pvc
+            claimName: media-pvc-legacy
 ---
 apiVersion: v1
 kind: Service
