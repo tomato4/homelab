@@ -24,13 +24,13 @@ spec:
                 - NET_ADMIN
           env:
             - name: PUID
-              value: {{ .Values.global.user.uid }}
+              value: "{{ .Values.global.user.uid }}"
             - name: PGID
-              value: {{ .Values.global.user.gid }}
+              value: "{{ .Values.global.user.gid }}"
             - name: OPENVPN_PROVIDER
-              value: {{ .Values.env.openvpnProvider }}
+              value: "{{ .Values.env.openvpnProvider }}"
             - name: OPENVPN_CONFIG
-              value: {{ .Values.env.openvpnConfig }}
+              value: "{{ .Values.env.openvpnConfig }}"
             - name: OPENVPN_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -42,11 +42,11 @@ spec:
                   name: {{ .Values.secrets.name }}
                   key: {{ .Values.secrets.passwordKey }}
             - name: TRANSMISSION_WEB_UI
-              value: {{ .Values.env.webUI }}
+              value: "{{ .Values.env.webUI }}"
             - name: LOCAL_NETWORK
-              value: {{ .Values.env.localNetwork }}
+              value: "{{ .Values.env.localNetwork }}"
             - name: TZ
-              value: {{ .Values.global.timezone }}
+              value: "{{ .Values.global.timezone }}"
           volumeMounts:
             - name: config
               mountPath: /config
