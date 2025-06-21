@@ -1,4 +1,4 @@
-{{- if .Values.apps.prowlarr.enabled | default false }}
+{{- if .Values.apps.prowlarr.enabled | default true }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
