@@ -1,0 +1,4 @@
+apiVersion: v2
+name: readarr
+version: 0.1.0
+description: Readarr subchart

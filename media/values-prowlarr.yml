@@ -1,0 +1,5 @@
+instanceName: main
+apps:
+  prowlarr:
+    enabled: true
+    domainPrefix: prowlarr

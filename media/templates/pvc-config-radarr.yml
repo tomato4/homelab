@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: config-radarr-pv
+spec:
+  capacity:
+    storage: {{ .Values.apps.radarr.volume.config.size }}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: {{ .Values.apps.radarr.volume.config.path }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config-radarr-pvc
+  namespace: {{ .Values.namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.apps.radarr.volume.config.size }}
+  volumeName: config-radarr-pv
+  storageClassName: ""

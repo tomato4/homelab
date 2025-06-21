@@ -1,0 +1,13 @@
+{{- if .Values.apps.prowlarr.enabled | default false }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: prowlarr-{{ .Values.instanceName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: prowlarr-{{ .Values.instanceName }}
+  ports:
+    - port: 9696
+      targetPort: 9696
+{{- end }}

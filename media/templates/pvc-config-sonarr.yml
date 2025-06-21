@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: config-sonarr-pv
+spec:
+  capacity:
+    storage: {{ .Values.apps.sonarr.volume.config.size }}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: {{ .Values.apps.sonarr.volume.config.path }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config-sonarr-pvc
+  namespace: {{ .Values.namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.apps.sonarr.volume.config.size }}
+  volumeName: config-sonarr-pv
+  storageClassName: ""

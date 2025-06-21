@@ -1,0 +1,46 @@
+{{- if .Values.apps.radarr.enabled | default false }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr-{{ .Values.instanceName }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: radarr-{{ .Values.instanceName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app: radarr-{{ .Values.instanceName }}
+  template:
+    metadata:
+      labels:
+        app: radarr-{{ .Values.instanceName }}
+    spec:
+      containers:
+        - name: radarr
+          image: {{ .Values.apps.radarr.image }}:{{ .Values.apps.radarr.tag }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+{{/*          ports:*/}}
+{{/*            - containerPort: 7878*/}}
+          env:
+            - name: PUID
+              value: "{{ .Values.global.user.uid }}"
+            - name: PGID
+              value: "{{ .Values.global.user.gid }}"
+            - name: TZ
+              value: "{{ .Values.global.timezone }}"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              subPath: {{ .Values.instanceName }}
+            - name: media
+              mountPath: /movies
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config-radarr-pvc
+        - name: media
+          persistentVolumeClaim:
+              claimName: media-pvc
+{{- end }}

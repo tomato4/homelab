@@ -1,0 +1,4 @@
+apiVersion: v2
+name: media
+description:  Helm chart for media apps (Prowlarr, Radarr, Sonarr, Readarr)
+version: 0.1.0

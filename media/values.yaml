@@ -1,0 +1,63 @@
+imagePullPolicy: IfNotPresent
+namespace: media
+
+volume:
+  media:
+    size: 100Gi
+    path: /mnt/storage/media
+
+apps:
+  prowlarr:
+    image: linuxserver/prowlarr
+    tag: latest
+    volume:
+      config:
+        size: 1Gi
+        path: /mnt/storage/config/prowlarr
+    vpn:
+      image: qmcgaw/gluetun
+      env:
+        VPN_SERVICE_PROVIDER: windscribe
+        VPN_TYPE: openvpn
+        OPENVPN_SECRET_NAME: windscribe-auth
+        OPENVPN_SECRET_USER_KEY: username
+        OPENVPN_SECRET_PASSWORD_KEY: password
+        SERVER_REGIONS: Czech Republic
+        DNS_KEEP_NAMESERVER: "on"
+        FIREWALL_OUTBOUND_SUBNETS: 10.42.0.0/15
+
+  radarr:
+    domainPrefix: radarr
+    image: linuxserver/radarr
+    configPath: /mnt/storage/config/radarr
+    mediaPath: /mnt/storage/media
+    mediaMountPath: /movies
+    volume:
+      config:
+        size: 1Gi
+        path: /mnt/storage/config/radarr
+
+  sonarr:
+    enabled: true
+    hostname: sonarr.internal
+    image: linuxserver/sonarr
+    port: 8989
+    configPath: /mnt/storage/config/sonarr
+    mediaPath: /mnt/storage/media
+    mediaMountPath: /series
+    volume:
+      config:
+        size: 1Gi
+        path: /mnt/storage/config/sonarr
+
+  readarr:
+    enabled: true
+    name: readarr-books
+    hostname: readarr.internal
+    image: lscr.io/linuxserver/readarr:develop
+    port: 8787
+    configPath: /mnt/storage/config/readarr
+    volume:
+      config:
+        size: 1Gi
+        path: /mnt/storage/config/readarr

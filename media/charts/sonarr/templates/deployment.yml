@@ -1,0 +1,46 @@
+{{- if .Values.apps.sonarr.enabled | default false }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr-{{ .Values.instanceName }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: sonarr-{{ .Values.instanceName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app: sonarr-{{ .Values.instanceName }}
+  template:
+    metadata:
+      labels:
+        app: sonarr-{{ .Values.instanceName }}
+    spec:
+      containers:
+        - name: sonarr
+          image: {{ .Values.apps.sonarr.image }}:{{ .Values.apps.sonarr.tag }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+{{/*          ports:*/}}
+{{/*            - containerPort: 8989*/}}
+          env:
+            - name: PUID
+              value: "{{ .Values.global.user.uid }}"
+            - name: PGID
+              value: "{{ .Values.global.user.gid }}"
+            - name: TZ
+              value: "{{ .Values.global.timezone }}"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              subPath: {{ .Values.instanceName }}
+            - name: media
+              mountPath: /movies
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config-sonarr-pvc
+        - name: media
+          persistentVolumeClaim:
+              claimName: media-pvc
+{{- end }}

@@ -1,4 +1,4 @@
 apiVersion: v2
-name: plex
-description: A Helm chart for Plex Media Server
+name: pihole
+description: A Helm chart for Pihole
 version: 0.1.0

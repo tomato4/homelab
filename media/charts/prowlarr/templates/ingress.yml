@@ -1,0 +1,19 @@
+{{- if .Values.apps.prowlarr.enabled | default false }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prowlarr-ingress-{{ .Values.instanceName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  rules:
+    - host: {{ .Values.apps.prowlarr.domainPrefix }}.{{ .Values.global.domain.internal.suffix }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prowlarr-{{ .Values.instanceName }}
+                port:
+                  number: 9696
+{{- end }}

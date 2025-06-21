@@ -1,0 +1,72 @@
+{{- if .Values.apps.prowlarr.enabled | default false }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr-{{ .Values.instanceName }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: prowlarr-{{ .Values.instanceName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app: prowlarr-{{ .Values.instanceName }}
+  template:
+    metadata:
+      labels:
+        app: prowlarr-{{ .Values.instanceName }}
+    spec:
+      containers:
+        - name: vpn
+          image: {{ .Values.apps.prowlarr.vpn.image }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          env:
+            - name: VPN_SERVICE_PROVIDER
+              value: {{ .Values.apps.prowlarr.vpn.env.VPN_SERVICE_PROVIDER | quote }}
+            - name: VPN_TYPE
+              value: {{ .Values.apps.prowlarr.vpn.env.VPN_TYPE | quote }}
+            - name: OPENVPN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.apps.prowlarr.vpn.env.OPENVPN_SECRET_NAME }}
+                  key: {{ .Values.apps.prowlarr.vpn.env.OPENVPN_SECRET_USER_KEY }}
+            - name: OPENVPN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.apps.prowlarr.vpn.env.OPENVPN_SECRET_NAME }}
+                  key: {{ .Values.apps.prowlarr.vpn.env.OPENVPN_SECRET_PASSWORD_KEY }}
+            - name: SERVER_REGIONS
+              value: {{ .Values.apps.prowlarr.vpn.env.SERVER_REGIONS | quote }}
+            - name: DNS_KEEP_NAMESERVER
+              value: {{ .Values.apps.prowlarr.vpn.env.DNS_KEEP_NAMESERVER | quote }}
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              value: {{ .Values.apps.prowlarr.vpn.env.FIREWALL_OUTBOUND_SUBNETS | quote }}
+
+        - name: prowlarr
+          image: {{ .Values.apps.prowlarr.image }}:{{ .Values.apps.prowlarr.tag }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          env:
+            - name: PUID
+              value: "{{ .Values.global.user.uid }}"
+            - name: PGID
+              value: "{{ .Values.global.user.gid }}"
+            - name: TZ
+              value: "{{ .Values.global.timezone }}"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              subPath: {{ .Values.instanceName }}
+{{/*          securityContext:*/}}
+{{/*            runAsUser: 1001*/}}
+{{/*            runAsGroup: 1002*/}}
+
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config-prowlarr-pvc
+{{- end }}

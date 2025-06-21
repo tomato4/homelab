@@ -1,0 +1,13 @@
+{{- if .Values.apps.readarr.enabled | default false }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: readarr-books-{{ .Values.instanceName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: readarr-books-{{ .Values.instanceName }}
+  ports:
+    - port: 8787
+      targetPort: 8787
+{{- end }}

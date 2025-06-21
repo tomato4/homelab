@@ -1,0 +1,13 @@
+instanceName: personal
+apps:
+  radarr:
+    enabled: true
+    domainPrefix: radarr
+
+  sonarr:
+    enabled: true
+    domainPrefix: sonarr
+
+#  readarr:
+#    enabled: true
+#    domainPrefix: readarr
