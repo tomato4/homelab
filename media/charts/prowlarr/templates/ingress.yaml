@@ -1,4 +1,3 @@
-{{- if .Values.apps.prowlarr.enabled | default false }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -16,4 +15,3 @@ spec:
                 name: prowlarr-{{ .Values.instanceName }}
                 port:
                   number: 9696
-{{- end }}

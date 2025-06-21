@@ -1,4 +1,3 @@
-{{- if .Values.apps.readarr.enabled | default false }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -43,4 +42,3 @@ spec:
 {{/*        - name: media*/}}
 {{/*          persistentVolumeClaim:*/}}
 {{/*              claimName: media-pvc*/}}
-{{- end }}

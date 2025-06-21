@@ -1,4 +1,3 @@
-{{- if .Values.apps.prowlarr.enabled | default false }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -69,4 +68,3 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: config-prowlarr-pvc
-{{- end }}

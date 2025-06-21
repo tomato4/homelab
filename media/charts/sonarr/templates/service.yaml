@@ -1,4 +1,3 @@
-{{- if .Values.apps.sonarr.enabled | default false }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -10,4 +9,3 @@ spec:
   ports:
     - port: 8989
       targetPort: 8989
-{{- end }}
