@@ -2,3 +2,16 @@ apiVersion: v2
 name: media
 description:  Helm chart for media apps (Prowlarr, Radarr, Sonarr, Readarr)
 version: 0.1.0
+dependencies:
+  - name: prowlarr
+    version: 0.1.0
+    repository: file://charts/prowlarr
+  - name: radarr
+    version: 0.1.0
+    repository: file://charts/radarr
+  - name: sonarr
+    version: 0.1.0
+    repository: file://charts/sonarr
+  - name: readarr
+    version: 0.1.0
+    repository: file://charts/readarr
