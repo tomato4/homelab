@@ -1,4 +1,0 @@
-apiVersion: v2
-name: calibre
-description: A Helm chart for Calibre
-version: 0.1.0

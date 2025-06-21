@@ -10,7 +10,7 @@ spec:
     path: plex
     helm:
       valueFiles:
-        - values.yaml
+        - values.yml
         - ../global/values.yml
   destination:
     server: https://kubernetes.default.svc

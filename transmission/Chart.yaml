@@ -1,4 +1,0 @@
-apiVersion: v2
-name: transmission
-description: A Helm chart for transmission
-version: 0.1.0
