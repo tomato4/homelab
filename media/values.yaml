@@ -38,7 +38,6 @@ apps:
         path: /mnt/storage/config/radarr
 
   sonarr:
-    enabled: true
     hostname: sonarr.internal
     image: linuxserver/sonarr
     port: 8989
@@ -51,7 +50,6 @@ apps:
         path: /mnt/storage/config/sonarr
 
   readarr:
-    enabled: true
     name: readarr-books
     hostname: readarr.internal
     image: lscr.io/linuxserver/readarr:develop
