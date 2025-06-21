@@ -1,0 +1,17 @@
+replicaCount: 1
+namespace: calibre
+
+image:
+  repository: linuxserver/calibre-web
+  tag: latest
+  pullPolicy: IfNotPresent
+
+domainPrefix: calibre
+
+volumes:
+  config:
+    size: 1Gi
+    path: /mnt/storage/config/calibre
+  books:
+    size: 100Gi
+    path: /mnt/storage/media/books
