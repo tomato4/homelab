@@ -1,13 +1,12 @@
 instanceName: personal
-apps:
-  radarr:
-    enabled: true
-    domainPrefix: radarr
+radarr:
+  enabled: true
+  domainPrefix: radarr
 
-  sonarr:
-    enabled: true
-    domainPrefix: sonarr
+sonarr:
+  enabled: true
+  domainPrefix: sonarr
 
-#  readarr:
-#    enabled: true
-#    domainPrefix: readarr
+#readarr:
+#  enabled: true
+#  domainPrefix: readarr

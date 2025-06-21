@@ -1,5 +1,4 @@
 instanceName: main
-apps:
-  prowlarr:
-    enabled: true
-    domainPrefix: prowlarr
+prowlarr:
+  enabled: true
+  domainPrefix: prowlarr

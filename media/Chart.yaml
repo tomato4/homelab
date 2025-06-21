@@ -6,16 +6,16 @@ dependencies:
   - name: prowlarr
     version: 0.1.0
     repository: file://charts/prowlarr
-    condition: apps.prowlarr.enabled
+    condition: prowlarr.enabled
   - name: radarr
     version: 0.1.0
     repository: file://charts/radarr
-    condition: apps.radarr.enabled
+    condition: radarr.enabled
   - name: sonarr
     version: 0.1.0
     repository: file://charts/sonarr
-    condition: apps.sonarr.enabled
+    condition: sonarr.enabled
   - name: readarr
     version: 0.1.0
     repository: file://charts/readarr
-    condition: apps.readarr.enabled
+    condition: readarr.enabled
