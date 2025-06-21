@@ -10,8 +10,8 @@ spec:
     path: transmission
     helm:
       valueFiles:
-        - values.yml
-        - ../global/values.yml
+        - values.yaml
+        - ../global/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: transmission

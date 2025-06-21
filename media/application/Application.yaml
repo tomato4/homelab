@@ -7,9 +7,9 @@ spec:
     - list:
         elements:
           - name: prowlarr
-            valuesFile: values-prowlarr.yml
+            valuesFile: values-prowlarr.yaml
           - name: main
-            valuesFile: values-main.yml
+            valuesFile: values-main.yaml
   template:
     metadata:
       name: '{{name}}'
@@ -21,8 +21,8 @@ spec:
         path: media
         helm:
           valueFiles:
-            - ../global/values.yml
-            - values.yml
+            - ../global/values.yaml
+            - values.yaml
             - '{{valuesFile}}'
       destination:
         server: https://kubernetes.default.svc
