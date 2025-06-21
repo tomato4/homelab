@@ -11,7 +11,7 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-        - ../global/values.yml
+        - ../global/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: transmission
