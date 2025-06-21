@@ -9,6 +9,7 @@ volume:
 apps:
   prowlarr:
     enabled: false
+    domainPrefix: ""
     image: linuxserver/prowlarr
     tag: latest
     volume:
@@ -29,7 +30,7 @@ apps:
 
   radarr:
     enabled: false
-    domainPrefix: radarr
+    domainPrefix: ""
     image: linuxserver/radarr
     configPath: /mnt/storage/config/radarr
     mediaPath: /mnt/storage/media
@@ -41,6 +42,7 @@ apps:
 
   sonarr:
     enabled: false
+    domainPrefix: ""
     hostname: sonarr.internal
     image: linuxserver/sonarr
     port: 8989
@@ -54,6 +56,7 @@ apps:
 
   readarr:
     enabled: false
+    domainPrefix: ""
     name: readarr-books
     hostname: readarr.internal
     image: lscr.io/linuxserver/readarr:develop
