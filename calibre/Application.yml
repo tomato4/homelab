@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: pihole
+  name: plex
 spec:
   project: default
   source:
     repoURL: https://github.com/tomato4/homelab.git
     targetRevision: HEAD
-    path: pihole
+    path: plex
     helm:
       valueFiles:
         - values.yaml
-        - ../global/values.yaml
+        - ../global/values.yml
   destination:
     server: https://kubernetes.default.svc
-    namespace: pihole
+    namespace: plex
   syncPolicy:
     automated:
       prune: true

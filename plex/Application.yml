@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: transmission
+  name: plex
 spec:
   project: default
   source:
     repoURL: https://github.com/tomato4/homelab.git
     targetRevision: HEAD
-    path: transmission
+    path: plex
     helm:
       valueFiles:
         - values.yaml
-        - ../global/values.yaml
+        - ../global/values.yml
   destination:
     server: https://kubernetes.default.svc
-    namespace: transmission
+    namespace: plex
   syncPolicy:
     automated:
       prune: true
