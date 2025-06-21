@@ -1,35 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
+kind: Application
 metadata:
-  name: media
+  namespace: media
 spec:
-  generators:
-    - list:
-        elements:
-          - name: prowlarr
-            valuesFile: values-prowlarr.yaml
-          - name: main
-            valuesFile: values-main.yaml
-  template:
-    metadata:
-      name: '{{name}}'
-    spec:
-      project: default
-      source:
-        repoURL: https://github.com/tomato4/homelab.git
-        targetRevision: HEAD
-        path: media
-        helm:
-          valueFiles:
-            - '../global/values.yml'
-            - 'values.yaml'
-            - '{{valuesFile}}'
-      destination:
-        server: https://kubernetes.default.svc
-        namespace: media
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
+  project: default
+  source:
+    repoURL: https://github.com/tomato4/homelab.git
+    targetRevision: HEAD
+    path: media/application
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: media
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
