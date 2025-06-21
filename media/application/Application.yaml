@@ -9,7 +9,7 @@ spec:
         elements:
           - name: prowlarr
             valuesFile: values-prowlarr.yaml
-          - name: main
+          - name: media-personal
             valuesFile: values-main.yaml
   template:
     metadata:
