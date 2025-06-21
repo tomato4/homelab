@@ -8,6 +8,7 @@ volume:
 
 apps:
   prowlarr:
+    enabled: false
     image: linuxserver/prowlarr
     tag: latest
     volume:
@@ -27,6 +28,7 @@ apps:
         FIREWALL_OUTBOUND_SUBNETS: 10.42.0.0/15
 
   radarr:
+    enabled: false
     domainPrefix: radarr
     image: linuxserver/radarr
     configPath: /mnt/storage/config/radarr
@@ -38,6 +40,7 @@ apps:
         path: /mnt/storage/config/radarr
 
   sonarr:
+    enabled: false
     hostname: sonarr.internal
     image: linuxserver/sonarr
     port: 8989
@@ -50,6 +53,7 @@ apps:
         path: /mnt/storage/config/sonarr
 
   readarr:
+    enabled: false
     name: readarr-books
     hostname: readarr.internal
     image: lscr.io/linuxserver/readarr:develop
