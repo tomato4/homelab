@@ -21,9 +21,9 @@ spec:
         path: media
         helm:
           valueFiles:
-            - ../../global/values.yaml
-            - ../values.yaml
-            - '../{{valuesFile}}'
+            - ../global/values.yaml
+            - values.yaml
+            - '{{valuesFile}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: media
