@@ -2,11 +2,11 @@ apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
   name: traefik-external
-  namespace: traefik-external
+  namespace: ingress
 spec:
   chart: traefik
   repo: https://helm.traefik.io/traefik
-  targetNamespace: traefik-external
+  targetNamespace: ingress
   version: 36.1.0
   valuesContent: |-
     service:
