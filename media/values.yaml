@@ -2,6 +2,8 @@ global:
   imagePullPolicy: IfNotPresent
   namespace: media
 
+defineGlobalPvc: false
+
 volume:
   media:
     size: 100Gi

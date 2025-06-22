@@ -1,4 +1,4 @@
-{{- if .Values.defineGlobalPvc.enabled | default false }}
+{{- if .Values.defineGlobalPvc.enabled }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
