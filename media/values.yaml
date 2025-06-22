@@ -29,6 +29,7 @@ prowlarr:
 radarr:
   enabled: false
   image: linuxserver/radarr
+  tag: latest
   configPath: /mnt/storage/config/radarr
   mediaPath: /mnt/storage/media
   mediaMountPath: /movies
@@ -41,6 +42,7 @@ sonarr:
   enabled: false
   hostname: sonarr.internal
   image: linuxserver/sonarr
+  tag: latest
   port: 8989
   configPath: /mnt/storage/config/sonarr
   mediaPath: /mnt/storage/media
@@ -54,7 +56,8 @@ readarr:
   enabled: false
   name: readarr-books
   hostname: readarr.internal
-  image: lscr.io/linuxserver/readarr:develop
+  image: lscr.io/linuxserver/readarr
+  tag: develop
   port: 8787
   configPath: /mnt/storage/config/readarr
   volume:
