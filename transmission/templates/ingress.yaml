@@ -4,6 +4,7 @@ metadata:
   name: transmission-ingress
   namespace: {{ .Values.namespace }}
 spec:
+  ingressClassName: traefik
   rules:
     - host: {{ .Values.domainPrefix }}.{{ .Values.global.domain.internal.suffix }}
       http:

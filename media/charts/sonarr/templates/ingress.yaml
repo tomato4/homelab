@@ -4,6 +4,7 @@ metadata:
   name: sonarr-ingress-{{ .Values.global.instanceName }}
   namespace: {{ .Values.global.namespace }}
 spec:
+  ingressClassName: traefik
   rules:
     - host: {{ .Values.domainPrefix }}.{{ .Values.global.domain.internal.suffix }}
       http:
