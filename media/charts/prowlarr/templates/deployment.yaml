@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prowlarr-{{ .Values.instanceName }}
+  name: prowlarr-{{ .Values.global.instanceName }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: prowlarr-{{ .Values.instanceName }}
+    app: prowlarr-{{ .Values.global.instanceName }}
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
   selector:
     matchLabels:
-      app: prowlarr-{{ .Values.instanceName }}
+      app: prowlarr-{{ .Values.global.instanceName }}
   template:
     metadata:
       labels:
-        app: prowlarr-{{ .Values.instanceName }}
+        app: prowlarr-{{ .Values.global.instanceName }}
     spec:
       containers:
         - name: vpn
@@ -59,7 +59,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-              subPath: {{ .Values.instanceName }}
+              subPath: {{ .Values.global.instanceName }}
 {{/*          securityContext:*/}}
 {{/*            runAsUser: 1001*/}}
 {{/*            runAsGroup: 1002*/}}

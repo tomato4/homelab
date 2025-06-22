@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: prowlarr-{{ .Values.instanceName }}
+  name: prowlarr-{{ .Values.global.instanceName }}
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    app: prowlarr-{{ .Values.instanceName }}
+    app: prowlarr-{{ .Values.global.instanceName }}
   ports:
     - port: 9696
       targetPort: 9696

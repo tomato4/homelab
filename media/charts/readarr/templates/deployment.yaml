@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: readarr-books-{{ .Values.instanceName }}
+  name: readarr-books-{{ .Values.global.instanceName }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: readarr-books-{{ .Values.instanceName }}
+    app: readarr-books-{{ .Values.global.instanceName }}
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
   selector:
     matchLabels:
-      app: readarr-books-{{ .Values.instanceName }}
+      app: readarr-books-{{ .Values.global.instanceName }}
   template:
     metadata:
       labels:
-        app: readarr-books-{{ .Values.instanceName }}
+        app: readarr-books-{{ .Values.global.instanceName }}
     spec:
       containers:
         - name: readarr
@@ -32,7 +32,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-              subPath: {{ .Values.instanceName }}
+              subPath: {{ .Values.global.instanceName }}
 {{/*            - name: media*/}}
 {{/*              mountPath: /movies*/}}
       volumes:

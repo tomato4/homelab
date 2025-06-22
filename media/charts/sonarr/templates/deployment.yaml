@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sonarr-{{ .Values.instanceName }}
+  name: sonarr-{{ .Values.global.instanceName }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: sonarr-{{ .Values.instanceName }}
+    app: sonarr-{{ .Values.global.instanceName }}
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
   selector:
     matchLabels:
-      app: sonarr-{{ .Values.instanceName }}
+      app: sonarr-{{ .Values.global.instanceName }}
   template:
     metadata:
       labels:
-        app: sonarr-{{ .Values.instanceName }}
+        app: sonarr-{{ .Values.global.instanceName }}
     spec:
       containers:
         - name: sonarr
@@ -32,7 +32,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-              subPath: {{ .Values.instanceName }}
+              subPath: {{ .Values.global.instanceName }}
             - name: media
               mountPath: /movies
       volumes:

@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: radarr-{{ .Values.instanceName }}
+  name: radarr-{{ .Values.global.instanceName }}
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    app: radarr-{{ .Values.instanceName }}
+    app: radarr-{{ .Values.global.instanceName }}
   ports:
     - port: 7878
       targetPort: 7878

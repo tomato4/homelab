@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prowlarr-ingress-{{ .Values.instanceName }}
+  name: prowlarr-ingress-{{ .Values.global.instanceName }}
   namespace: {{ .Values.namespace }}
 spec:
   rules:
@@ -12,6 +12,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: prowlarr-{{ .Values.instanceName }}
+                name: prowlarr-{{ .Values.global.instanceName }}
                 port:
                   number: 9696

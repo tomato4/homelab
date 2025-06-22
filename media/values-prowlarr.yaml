@@ -1,4 +1,6 @@
-instanceName: main
+global:
+  instanceName: main
+
 prowlarr:
   enabled: true
   domainPrefix: prowlarr

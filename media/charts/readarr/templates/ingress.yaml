@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: readarr-books-ingress-{{ .Values.instanceName }}
+  name: readarr-books-ingress-{{ .Values.global.instanceName }}
   namespace: {{ .Values.namespace }}
 spec:
   rules:
@@ -12,6 +12,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: readarr-books-{{ .Values.instanceName }}
+                name: readarr-books-{{ .Values.global.instanceName }}
                 port:
                   number: 8787

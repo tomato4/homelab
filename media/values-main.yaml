@@ -1,4 +1,6 @@
-instanceName: personal
+global:
+  instanceName: personal
+
 radarr:
   enabled: true
   domainPrefix: radarr

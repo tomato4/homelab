@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: radarr-{{ .Values.instanceName }}
+  name: radarr-{{ .Values.global.instanceName }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: radarr-{{ .Values.instanceName }}
+    app: radarr-{{ .Values.global.instanceName }}
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
   selector:
     matchLabels:
-      app: radarr-{{ .Values.instanceName }}
+      app: radarr-{{ .Values.global.instanceName }}
   template:
     metadata:
       labels:
-        app: radarr-{{ .Values.instanceName }}
+        app: radarr-{{ .Values.global.instanceName }}
     spec:
       containers:
         - name: radarr
@@ -32,7 +32,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-              subPath: {{ .Values.instanceName }}
+              subPath: {{ .Values.global.instanceName }}
             - name: media
               mountPath: /movies
       volumes:
