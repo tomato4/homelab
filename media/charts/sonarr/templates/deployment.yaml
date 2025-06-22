@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sonarr-{{ .Values.global.instanceName }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.global.namespace }}
   labels:
     app: sonarr-{{ .Values.global.instanceName }}
 spec:
@@ -19,7 +19,7 @@ spec:
       containers:
         - name: sonarr
           image: {{ .Values.image }}:{{ .Values.tag }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
 {{/*          ports:*/}}
 {{/*            - containerPort: 8989*/}}
           env:

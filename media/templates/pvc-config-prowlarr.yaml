@@ -1,3 +1,4 @@
+{{- if .Values.defineGlobalPvc.enabled | default false }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -23,3 +24,4 @@ spec:
       storage: {{ .Values.prowlarr.volume.config.size }}
   volumeName: config-prowlarr-pv
   storageClassName: ""
+{{- end }}

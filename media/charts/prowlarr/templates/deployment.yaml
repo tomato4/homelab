@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prowlarr-{{ .Values.global.instanceName }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.global.namespace }}
   labels:
     app: prowlarr-{{ .Values.global.instanceName }}
 spec:
@@ -19,7 +19,7 @@ spec:
       containers:
         - name: vpn
           image: {{ .Values.vpn.image }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
           securityContext:
             capabilities:
               add:
@@ -48,7 +48,7 @@ spec:
 
         - name: prowlarr
           image: {{ .Values.image }}:{{ .Values.tag }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
           env:
             - name: PUID
               value: "{{ .Values.global.user.uid }}"

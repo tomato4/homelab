@@ -1,0 +1,2 @@
+defineGlobalPvc:
+  enabled: true

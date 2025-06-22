@@ -1,5 +1,6 @@
-imagePullPolicy: IfNotPresent
-namespace: media
+global:
+  imagePullPolicy: IfNotPresent
+  namespace: media
 
 volume:
   media:
