@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: vpn
-          image: {{ .Values.prowlarr.vpn.image }}
+          image: {{ .Values.vpn.image }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           securityContext:
             capabilities:
