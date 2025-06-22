@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: radarr
-          image: {{ .Values.apps.radarr.image }}:{{ .Values.apps.radarr.tag }}
+          image: {{ .Values.image }}:{{ .Values.tag }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
 {{/*          ports:*/}}
 {{/*            - containerPort: 7878*/}}

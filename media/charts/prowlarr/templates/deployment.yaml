@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: vpn
-          image: {{ .Values.apps.prowlarr.vpn.image }}
+          image: {{ .Values.prowlarr.vpn.image }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           securityContext:
             capabilities:
@@ -26,28 +26,28 @@ spec:
                 - NET_ADMIN
           env:
             - name: VPN_SERVICE_PROVIDER
-              value: {{ .Values.apps.prowlarr.vpn.env.VPN_SERVICE_PROVIDER | quote }}
+              value: {{ .Values.vpn.env.VPN_SERVICE_PROVIDER | quote }}
             - name: VPN_TYPE
-              value: {{ .Values.apps.prowlarr.vpn.env.VPN_TYPE | quote }}
+              value: {{ .Values.vpn.env.VPN_TYPE | quote }}
             - name: OPENVPN_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.apps.prowlarr.vpn.env.OPENVPN_SECRET_NAME }}
-                  key: {{ .Values.apps.prowlarr.vpn.env.OPENVPN_SECRET_USER_KEY }}
+                  name: {{ .Values.vpn.env.OPENVPN_SECRET_NAME }}
+                  key: {{ .Values.vpn.env.OPENVPN_SECRET_USER_KEY }}
             - name: OPENVPN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.apps.prowlarr.vpn.env.OPENVPN_SECRET_NAME }}
-                  key: {{ .Values.apps.prowlarr.vpn.env.OPENVPN_SECRET_PASSWORD_KEY }}
+                  name: {{ .Values.vpn.env.OPENVPN_SECRET_NAME }}
+                  key: {{ .Values.vpn.env.OPENVPN_SECRET_PASSWORD_KEY }}
             - name: SERVER_REGIONS
-              value: {{ .Values.apps.prowlarr.vpn.env.SERVER_REGIONS | quote }}
+              value: {{ .Values.vpn.env.SERVER_REGIONS | quote }}
             - name: DNS_KEEP_NAMESERVER
-              value: {{ .Values.apps.prowlarr.vpn.env.DNS_KEEP_NAMESERVER | quote }}
+              value: {{ .Values.vpn.env.DNS_KEEP_NAMESERVER | quote }}
             - name: FIREWALL_OUTBOUND_SUBNETS
-              value: {{ .Values.apps.prowlarr.vpn.env.FIREWALL_OUTBOUND_SUBNETS | quote }}
+              value: {{ .Values.vpn.env.FIREWALL_OUTBOUND_SUBNETS | quote }}
 
         - name: prowlarr
-          image: {{ .Values.apps.prowlarr.image }}:{{ .Values.apps.prowlarr.tag }}
+          image: {{ .Values.image }}:{{ .Values.tag }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           env:
             - name: PUID

@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   rules:
-    - host: {{ .Values.apps.sonarr.domainPrefix }}.{{ .Values.global.domain.internal.suffix }}
+    - host: {{ .Values.domainPrefix }}.{{ .Values.global.domain.internal.suffix }}
       http:
         paths:
           - path: /
