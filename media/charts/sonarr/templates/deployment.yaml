@@ -20,8 +20,6 @@ spec:
         - name: sonarr
           image: {{ .Values.image }}:{{ .Values.tag }}
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{/*          ports:*/}}
-{{/*            - containerPort: 8989*/}}
           env:
             - name: PUID
               value: "{{ .Values.global.user.uid }}"

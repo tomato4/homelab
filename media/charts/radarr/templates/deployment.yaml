@@ -20,8 +20,6 @@ spec:
         - name: radarr
           image: {{ .Values.image }}:{{ .Values.tag }}
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{/*          ports:*/}}
-{{/*            - containerPort: 7878*/}}
           env:
             - name: PUID
               value: "{{ .Values.global.user.uid }}"

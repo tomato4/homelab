@@ -60,10 +60,6 @@ spec:
             - name: config
               mountPath: /config
               subPath: {{ .Values.global.instanceName }}
-{{/*          securityContext:*/}}
-{{/*            runAsUser: 1001*/}}
-{{/*            runAsGroup: 1002*/}}
-
       volumes:
         - name: config
           persistentVolumeClaim:
