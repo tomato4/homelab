@@ -9,6 +9,6 @@ global:
     internal:
       suffix: "internal"
     public:
-      suffix: ""
+      suffix: "glazrtom.fun"
 
   revisionHistoryLimit: 1

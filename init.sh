@@ -43,3 +43,22 @@ helm upgrade \
   --set-string oauth.clientSecret="" \
   --wait
 
+## Inspired by https://github.com/mitchross/k3s-argocd-starter
+# Cloudflare
+#helm repo add cloudflare https://cloudflare.github.io/helm-charts
+#helm repo update
+TUNNEL_NAME=cloudflare-tunnel
+DOMAIN=
+cloudflared tunnel login
+cloudflared tunnel create $TUNNEL_NAME
+cloudflared tunnel token --cred-file <tunnel-creds>.json $TUNNEL_NAME
+# Create namespace for cloudflared
+kubectl create namespace cloudflared
+# Create Kubernetes secret
+kubectl create secret generic cloudflare-credentials \
+  --namespace=cloudflared \
+  --from-file=credentials.json=<tunnel-creds>.json
+
+# Configure DNS
+TUNNEL_ID=$(cloudflared tunnel list | grep $TUNNEL_NAME | awk '{print $1}')
+cloudflared tunnel route dns $TUNNEL_ID "*.$DOMAIN"

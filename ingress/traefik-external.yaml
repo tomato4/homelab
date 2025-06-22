@@ -1,0 +1,16 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: traefik-external
+  namespace: traefik-external
+spec:
+  chart: traefik
+  repo: https://helm.traefik.io/traefik
+  targetNamespace: traefik-external
+  version: 36.1.0
+  valuesContent: |-
+    service:
+      type: ClusterIP
+    ingressClass:
+      isDefaultClass: false
+      name: traefik-external

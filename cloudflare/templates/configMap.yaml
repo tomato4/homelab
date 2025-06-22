@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-config
+  namespace: cloudflared
+data:
+  config.yaml: |
+    tunnel: cloudflare-tunnel
+    credentials-file: /etc/cloudflared/credentials/credentials.json
+    loglevel: debug
+    transport-loglevel: debug
+    ingress:
+      - hostname: '*.{{ .Values.global.public }}'
+        service: http://traefik-external.traefik-external.svc.cluster.local:80
+        originRequest:
+          noTLSVerify: true
+          originServerName: "*.{{ .Values.global.public }}"
+          logHeaders: true
+          headers:
+            - name: CF-Connecting-IP
+            - name: X-Real-IP
+            - name: CF-IPCountry
+            - name: CF-Ray
+            - name: CF-Visitor
+            - name: CF-Device-Type
+            - name: CF-IPCITY
+            - name: CF-IPCONTINENT
+            - name: CF-IPLATITUDE
+            - name: CF-IPLONGITUDE
+            - name: CF-IPREGION
+            - name: X-Forwarded-For
+            - name: Accept-Language
+            - name: User-Agent
+      - service: http_status:404
