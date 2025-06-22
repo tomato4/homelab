@@ -10,10 +10,14 @@ spec:
           - name: prowlarr
             # also define global PVCs here since this deployment will be single one
             valuesFiles: |
+              - ../global/values.yaml
+              - values.yaml
               - values-prowlarr.yaml
               - values-global-pvc.yaml
           - name: media-personal
             valuesFiles: |
+              - ../global/values.yaml
+              - values.yaml
               - values-main.yaml
   template:
     metadata:
@@ -25,10 +29,7 @@ spec:
         targetRevision: HEAD
         path: media
         helm:
-          valueFiles:
-            - ../global/values.yaml
-            - values.yaml
-{{ .valueFiles | indent 12 }}
+          valueFiles: {{ .valuesFiles }}
       destination:
         server: https://kubernetes.default.svc
         namespace: media
