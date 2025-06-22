@@ -4,11 +4,11 @@ metadata:
   name: config-readarr-books-pv
 spec:
   capacity:
-    storage: {{ .Values.apps.readarr.volume.config.size }}
+    storage: {{ .Values.readarr.volume.config.size }}
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: {{ .Values.apps.readarr.volume.config.path }}
+    path: {{ .Values.readarr.volume.config.path }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -20,6 +20,6 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.apps.readarr.volume.config.size }}
+      storage: {{ .Values.readarr.volume.config.size }}
   volumeName: config-readarr-books-pv
   storageClassName: ""

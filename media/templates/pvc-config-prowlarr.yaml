@@ -4,11 +4,11 @@ metadata:
   name: config-prowlarr-pv
 spec:
   capacity:
-    storage: {{ .Values.apps.prowlarr.volume.config.size }}
+    storage: {{ .Values.prowlarr.volume.config.size }}
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: {{ .Values.apps.prowlarr.volume.config.path }}
+    path: {{ .Values.prowlarr.volume.config.path }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -20,6 +20,6 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.apps.prowlarr.volume.config.size }}
+      storage: {{ .Values.prowlarr.volume.config.size }}
   volumeName: config-prowlarr-pv
   storageClassName: ""
