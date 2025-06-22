@@ -28,7 +28,7 @@ spec:
           valueFiles:
             - ../global/values.yaml
             - values.yaml
-            - {{ .valueFilesYaml }}
+{{ .valueFiles | indent 12 }}
       destination:
         server: https://kubernetes.default.svc
         namespace: media
