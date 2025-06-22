@@ -34,7 +34,7 @@ spec:
               mountPath: /config
               subPath: {{ .Values.global.instanceName }}
             - name: media
-              mountPath: /movies
+              mountPath: /series
       volumes:
         - name: config
           persistentVolumeClaim:
