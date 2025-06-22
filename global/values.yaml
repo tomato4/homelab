@@ -1,6 +1,6 @@
 global:
   user:
-    uid: "1001"
+    uid: "1002"
     gid: "1002"
 
   timezone: "Europe/Prague"
