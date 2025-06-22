@@ -9,6 +9,6 @@ sonarr:
   enabled: true
   domainPrefix: sonarr
 
-#readarr:
-#  enabled: true
-#  domainPrefix: readarr
+readarr:
+  enabled: true
+  domainPrefix: readarr

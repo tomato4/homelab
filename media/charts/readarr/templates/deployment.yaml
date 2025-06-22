@@ -33,12 +33,12 @@ spec:
             - name: config
               mountPath: /config
               subPath: {{ .Values.global.instanceName }}
-{{/*            - name: media*/}}
-{{/*              mountPath: /movies*/}}
+            - name: media
+              mountPath: /books
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: config-readarr-books-pvc
-{{/*        - name: media*/}}
-{{/*          persistentVolumeClaim:*/}}
-{{/*              claimName: media-pvc*/}}
+        - name: media
+          persistentVolumeClaim:
+              claimName: media-pvc
