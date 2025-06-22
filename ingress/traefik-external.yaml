@@ -14,3 +14,5 @@ spec:
     ingressClass:
       isDefaultClass: false
       name: traefik-external
+    additionalArguments:
+      - --providers.kubernetesingress.ingressclass=traefik-external
