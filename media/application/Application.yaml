@@ -8,11 +8,13 @@ spec:
     - list:
         elements:
           - name: prowlarr
-            valuesFiles:
+            # also define global PVCs here since this deployment will be single one
+            valuesFiles: |
               - values-prowlarr.yaml
-              - values-global-pvc.yaml # also define global PVCs here since this deployment will be single one
+              - values-global-pvc.yaml
           - name: media-personal
-            valuesFiles: values-main.yaml
+            valuesFiles: |
+              - values-main.yaml
   template:
     metadata:
       name: '{{name}}'
@@ -26,9 +28,7 @@ spec:
           valueFiles:
             - ../global/values.yaml
             - values.yaml
-            {{- range .valuesFiles }}
-            - {{ . }}
-            {{- end }}
+            - {{ .valueFilesYaml }}
       destination:
         server: https://kubernetes.default.svc
         namespace: media
