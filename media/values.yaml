@@ -2,7 +2,8 @@ global:
   imagePullPolicy: IfNotPresent
   namespace: media
 
-defineGlobalPvc: false
+defineGlobalPvc:
+  enabled: false
 
 volume:
   media:
