@@ -4,7 +4,7 @@ metadata:
   name: radarr-ingress-{{ .Values.global.instanceName }}
   namespace: {{ .Values.global.namespace }}
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx-internal
   rules:
     - host: {{ .Values.domainPrefix }}.{{ .Values.global.domain.internal.suffix }}
       http:

@@ -4,7 +4,7 @@ metadata:
   name: plex-ingress
   namespace: {{ .Values.namespace }}
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx-internal
   rules:
     - host: {{ .Values.domainPrefix }}.{{ .Values.global.domain.internal.suffix }}
       http:
