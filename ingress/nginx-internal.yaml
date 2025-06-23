@@ -1,0 +1,16 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: nginx-internal
+  namespace: ingress
+spec:
+  chart: ingress-nginx
+  repo: https://kubernetes.github.io/ingress-nginx
+  targetNamespace: ingress
+  version: 4.12.3
+  valuesContent: |-
+    controller:
+      ingressClassResource:
+        name: nginx-internal
+        default: false
+      ingressClass: nginx-internal
