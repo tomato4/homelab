@@ -9,10 +9,6 @@ spec:
   targetNamespace: ingress
   version: 36.1.0
   valuesContent: |-
-    service:
-      type: ClusterIP
     ingressClass:
       isDefaultClass: false
       name: traefik-external
-    additionalArguments:
-      - --providers.kubernetesingress.ingressclass=traefik-external
