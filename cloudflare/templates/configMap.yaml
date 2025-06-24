@@ -10,11 +10,11 @@ data:
     loglevel: debug
     transport-loglevel: debug
     ingress:
-      - hostname: '*.{{ .Values.global.public }}'
+      - hostname: '*.{{ .Values.global.domain.public.suffix }}'
         service: http://nginx-external.ingress.svc.cluster.local:80
         originRequest:
           noTLSVerify: true
-          originServerName: "*.{{ .Values.global.public }}"
+          originServerName: "*.{{ .Values.global.domain.public.suffix }}"
           logHeaders: true
           headers:
             - name: CF-Connecting-IP
