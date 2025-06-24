@@ -6,6 +6,9 @@ metadata:
   name: cloudflared
   namespace: {{ .Values.namespace }}
 spec:
+  revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: cloudflared
