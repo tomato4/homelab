@@ -1,0 +1,18 @@
+namespace: authentik
+domainPrefix: authentik
+
+server:
+  extraEnv:
+    - name: AUTHENTIK_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: authentik-secrets
+          key: authentik-secret
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-secrets
+          key: authentik-postgresql
+
+redis:
+  enabled: true
