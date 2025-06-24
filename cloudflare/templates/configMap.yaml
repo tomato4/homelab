@@ -11,7 +11,7 @@ data:
     transport-loglevel: debug
     ingress:
       - hostname: '*.{{ .Values.global.domain.public.suffix }}'
-        service: http://nginx-external.ingress.svc.cluster.local:80
+        service: http://nginx-external-ingress-nginx-controller.ingress.svc.cluster.local:80
         originRequest:
           noTLSVerify: true
           originServerName: "*.{{ .Values.global.domain.public.suffix }}"
