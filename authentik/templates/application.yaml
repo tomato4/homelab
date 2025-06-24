@@ -14,7 +14,7 @@ spec:
     targetRevision: 2024.4.2 # Use the latest or pin a version
     helm:
       valueFiles:
-        - ../values.yaml
+        - values.yaml
   syncPolicy:
     automated:
       selfHeal: true
