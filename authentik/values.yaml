@@ -12,10 +12,3 @@ authentik:
 
   postgresql:
     enabled: true
-    primary:
-      extraEnvVars:
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: authentik-secrets
-              key: AUTHENTIK_POSTGRESQL__PASSWORD
