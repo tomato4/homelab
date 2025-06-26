@@ -14,8 +14,6 @@ authentik:
     enabled: true
     primary:
       extraEnvVars:
-        - name: POSTGRES_USER
-          value: authentik
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
