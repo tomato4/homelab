@@ -1,10 +1,11 @@
 namespace: authentik
 domainPrefix: authentik
 
-server:
-  envFrom:
-    - secretRef:
-        name: authentik-secrets
+authentik:
+  global:
+    envFrom:
+      - secretRef:
+          name: authentik-secrets
 
 redis:
   enabled: true
