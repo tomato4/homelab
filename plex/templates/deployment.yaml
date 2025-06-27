@@ -44,3 +44,6 @@ spec:
               value: "{{ .Values.env.version }}"
             - name: TZ
               value: "{{ .Values.global.timezone }}"
+        - name: proxy
+          image: alpine/socat
+          command: ["socat", "TCP4-LISTEN:32401,fork,reuseaddr", "TCP4:localhost:32400"]
