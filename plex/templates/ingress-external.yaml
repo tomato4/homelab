@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: plex-ingress-external
   namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+        proxy_set_header X-Forwarded-Host 192.168.0.1;
 spec:
   ingressClassName: nginx-internal
   rules:
