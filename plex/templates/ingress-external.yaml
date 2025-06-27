@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
         proxy_set_header X-Forwarded-Host 192.168.0.1;
 spec:
-  ingressClassName: nginx-internal
+  ingressClassName: nginx-external
   rules:
     - host: {{ .Values.domainPrefix }}.{{ .Values.global.domain.public.suffix }}
       http:
