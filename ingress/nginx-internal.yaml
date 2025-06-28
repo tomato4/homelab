@@ -14,4 +14,6 @@ spec:
         name: nginx-internal
         default: false
       ingressClass: nginx-internal
-      enableSnippets: true
+      allowSnippetAnnotations: true
+      config:
+        allow-snippet-annotations: "true"
