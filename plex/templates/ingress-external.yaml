@@ -13,6 +13,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: plex-nginx
+                name: plex
                 port:
                   number: 32400

@@ -23,7 +23,7 @@ spec:
             claimName: media-pvc
       containers:
         - name: plex
-          image: {{ .Values.image.repository }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           livenessProbe:
             tcpSocket:
