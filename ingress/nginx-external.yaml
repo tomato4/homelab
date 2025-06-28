@@ -14,8 +14,5 @@ spec:
         name: nginx-external
         default: false
       ingressClass: nginx-external
-      allowSnippetAnnotations: true
-      config:
-        allow-snippet-annotations: "true"
 #      service:
 #        loadBalancerIP: 192.168.0.241

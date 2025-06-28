@@ -1,0 +1,4 @@
+apiVersion: v2
+name: plex-nginx
+description: A Helm chart for Nginx server fro plex
+version: 0.1.0
