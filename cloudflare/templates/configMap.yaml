@@ -5,8 +5,6 @@ metadata:
   namespace: cloudflared
 data:
   config.yaml: |
-    tunnel: cloudflare-tunnel
-    credentials-file: /etc/cloudflared/credentials/credentials.json
     loglevel: debug
     transport-loglevel: debug
     ingress:
