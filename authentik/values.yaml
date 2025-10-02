@@ -11,6 +11,9 @@ ingress:
   domainPrefix: authentik
 
 postgresql:
+  image:
+    repository: bitnamisecure/postgresql
+    tag: latest
   auth:
     username: authentik
     database: authentik
@@ -21,3 +24,17 @@ postgresql:
 redis:
   auth:
     enabled: false
+  image:
+    repository: bitnamisecure/redis
+    tag: latest
+    # fallback: bitnamilegacy/redis
+    sentinel:
+      image:
+        repository: bitnamisecure/redis-sentinel
+        tag: latest
+        # fallback: bitnamilegacy/redis-sentinel
+    metrics:
+      image:
+        repository: bitnamisecure/redis-exporter
+        tag: latest
+        # fallback: bitnamilegacy/redis-exporter
