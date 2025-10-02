@@ -1,0 +1,14 @@
+namespace: authentik
+domainPrefix: authentik
+
+authentik:
+  global:
+    envFrom:
+      - secretRef:
+          name: authentik-secrets
+
+  redis:
+    enabled: true
+
+  postgresql:
+    enabled: true

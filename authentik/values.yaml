@@ -1,14 +1,23 @@
-namespace: authentik
-domainPrefix: authentik
+image:
+  repository: ghcr.io/goauthentik/server
+  tag: "2024.8.2"
+  pullPolicy: IfNotPresent
 
-authentik:
-  global:
-    envFrom:
-      - secretRef:
-          name: authentik-secrets
+service:
+  name: authentik-server
 
-  redis:
-    enabled: true
+ingress:
+  className: nginx-internal
+  domainPrefix: authentik
 
-  postgresql:
-    enabled: true
+postgresql:
+  auth:
+    username: authentik
+    database: authentik
+    existingSecret: authentik-secrets
+    secretKeys:
+      userPasswordKey: POSTGRESQL_PASSWORD
+
+redis:
+  auth:
+    enabled: false
