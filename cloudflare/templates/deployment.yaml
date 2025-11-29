@@ -23,6 +23,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - tunnel
+            - --token
+            - "$TUNNEL_TOKEN"
             - --config
             - /etc/cloudflared/config/config.yaml
             - --metrics=0.0.0.0:3333
